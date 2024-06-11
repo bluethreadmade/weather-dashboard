@@ -33,24 +33,43 @@ function searchSubmit(event) {
     // clears the search bar
     $('#search-input').val('');
 
-    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${searchInput}&APPID=9025870b58f55c244123e7bc18ed93ea`;
+    const geoApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${searchInput}&APPID=9025870b58f55c244123e7bc18ed93ea`;
 
-    fetch(apiUrl)
+    fetch(geoApiUrl)
       .then(function (response) {
         if (response.ok) {
-          response.json().then(function (data) {
+          return response.json();
+        } else {
+          throw new Error ('Failed to fetch coordinates');
+        }
+      })
+      .then(function (data) {
             console.log(data.name);
             console.log(data.coord.lat);
             console.log(data.coord.lon);
-          });
-      } //   else {
-      //     alert(`Error:${response.statusText}`);
-      //   }
-      // })
-      // .catch(function (error) {
-      //   alert('Unable to connect');
-       });//
-};
+            
+            const searchLat = data.coord.lat; 
+            const searchLon = data.coord.lon;
+
+          const weatherApiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${searchLat}&lon=${searchLon}&APPID=9025870b58f55c244123e7bc18ed93ea`
+        
+          fetch(weatherApiUrl)
+        .then(function (weatherResponse) {
+          if (weatherResponse.ok) {
+            return weatherResponse.json();
+          } else {
+            throw new Error('Failed to fetch weather data')
+          }
+        })
+        .then(function (weatherData) {
+            console.log(weatherData);
+        })
+        .catch(function (error) {
+            console.error('Error featching geographical coordinated:', error);
+        });
+      })
+}
+
 
   
 // Search button event listener
