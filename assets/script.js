@@ -6,7 +6,7 @@
  
 // apiTest()
 
-// const requestUrl = 'https://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=9025870b58f55c244123e7bc18ed93ea';
+// const requestUrl = 'https://api.openweathermap.org/data/2.5/weather?q=`${London}`,uk&APPID=9025870b58f55c244123e7bc18ed93ea';
 
 // fetch(requestUrl)
 //   .then(function (response) {
@@ -22,7 +22,7 @@
 
 
 // takes the text entered in the search bar and assigns it to a variable when the search button is clicked
-  function searchSubmit(event) {
+function searchSubmit(event) {
     event.preventDefault();
 
     const searchInput = $('#search-input').val();
@@ -33,7 +33,25 @@
     // clears the search bar
     $('#search-input').val('');
 
+    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${searchInput}&APPID=9025870b58f55c244123e7bc18ed93ea`;
+
+    fetch(apiUrl)
+      .then(function (response) {
+        if (response.ok) {
+          response.json().then(function (data) {
+            console.log(data.name);
+            console.log(data.coord.lat);
+            console.log(data.coord.lon);
+          });
+      } //   else {
+      //     alert(`Error:${response.statusText}`);
+      //   }
+      // })
+      // .catch(function (error) {
+      //   alert('Unable to connect');
+       });//
 };
+
   
 // Search button event listener
-$('#search-bar').on('submit', searchSubmit);
+$('#search-bar').on('submit', searchSubmit)
