@@ -12,7 +12,40 @@
     <title>Weather Dashboard</title>
 </head>
 <body>
-    <header> Hello World </header>
+    <header class="p-4 mb-4 text-center border-bottom border-5">
+        <h1 class="display-3">Weather Dashboard</h1>
+    </header>
+
+    <main>
+        <article class="p-4 mb-4 col-8" id="current-weather-section">
+            <h2>Searched for city</h2>
+            <ul id="current-weather-details">
+                <li id="current-temp">current temp</li>
+                <li id="current-wind">current wind</li>
+                <li id="current-humidity">current humidity</li>
+            </ul>
+        </article>
+        <article class="p-4 mb-4 col-4" id="five-day">
+            <h2>5 Day Forecast</h2>
+        </article>
+    </main>
+
+    <aside id="search-bar">
+        <form>
+            <div>
+              <h2>Search for a city:</h2>
+              <label for="search-box" class="form-label">Search</label>
+              <input type="password" class="form-control" id="exampleInputPassword1">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+
+        <div id="search-history">
+            <h2>Search History</h2>
+        </div>
+
+    </aside>
+
 </body>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
