@@ -44,14 +44,14 @@ function searchSubmit(event) {
       }
     })
      .then(function (data) {
-          console.log(data.name);
-          console.log(data.coord.lat);
-          console.log(data.coord.lon);
-          console.log(data.main.temp);
-          console.log(data.main.humidity);
-          console.log(data.weather[0].icon);
-          console.log(data.wind.speed);
-          console.log(data.dt);
+          // console.log(data.name);
+          // console.log(data.coord.lat);
+          // console.log(data.coord.lon);
+          // console.log(data.main.temp);
+          // console.log(data.main.humidity);
+          // console.log(data.weather[0].icon);
+          // console.log(data.wind.speed);
+          // console.log(data.dt);
 
           const searchLat = data.coord.lat; 
           const searchLon = data.coord.lon;
@@ -76,7 +76,7 @@ function searchSubmit(event) {
 
           console.log(currentWeather);
 
-        const weatherApiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${searchLat}&lon=${searchLon}&APPID=9025870b58f55c244123e7bc18ed93ea&units=imperial`
+        const weatherApiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${searchLat}&lon=${searchLon}&cnt=1&APPID=9025870b58f55c244123e7bc18ed93ea&units=imperial`
       
         fetch(weatherApiUrl)
       .then(function (weatherResponse) {
@@ -87,15 +87,33 @@ function searchSubmit(event) {
         }
       })
       .then(function (weatherData) {
-          console.log(weatherData.list.main);
+          console.log(weatherData);
+
+          weatherData.list.forEach(function(dayData) {
+            const dayTemp = dayData.main.temp.day;
+            const dayHumidity = dayData.main.humidity;
+          // const dayIcon = list.weather[0].icon;
+          // const dayWind = list.wind.speed;
+          // const dayTime = list.dt;
+
+          // console.log("5-day");
+          console.log(dayHumidity);
+          // console.log(list.main.humidity);
+          // console.log(list.weather[0].icon);
+          // console.log(list.wind.speed);
+          // console.log(list.dt);
+          
+        });
+
       })
       .catch(function (error) {
           console.error('Error featching geographical coordinated:', error);
       });
     
      createCurrentWeatherArticle(currentWeather);
-    })
-}
+      })
+
+    };
 
 function createCurrentWeatherArticle(currentWeather) {
           console.log("hi");
@@ -125,7 +143,9 @@ function createCurrentWeatherArticle(currentWeather) {
           .appendTo("#current-weather");
 
   return currentWeatherArticle;
-}
+};
+
+//function createFiveDay()
 
 
 
