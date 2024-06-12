@@ -19,61 +19,71 @@
 //     //   console.log(data[i].name);
 //     // }
 //   });
-
+let currentWeather = {};
 
 // takes the text entered in the search bar and assigns it to a variable when the search button is clicked
 function searchSubmit(event) {
-    event.preventDefault();
+  event.preventDefault();
 
-    const searchInput = $('#search-input').val();
-    
-    console.log("searched");
-    console.log(searchInput);
+  const searchInput = $('#search-input').val();
+  
+  console.log("searched");
+  console.log(searchInput);
 
-    // clears the search bar
-    $('#search-input').val('');
+  // clears the search bar
+  $('#search-input').val('');
 
-    const geoApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${searchInput}&APPID=9025870b58f55c244123e7bc18ed93ea&units=imperial`;
+  const geoApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${searchInput}&APPID=9025870b58f55c244123e7bc18ed93ea&units=imperial`;
 
-    fetch(geoApiUrl)
-      .then(function (response) {
-        if (response.ok) {
-          return response.json();
+  fetch(geoApiUrl)
+    .then(function (response) {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error ('Failed to fetch coordinates');
+      }
+    })
+     .then(function (data) {
+          console.log(data.name);
+          console.log(data.coord.lat);
+          console.log(data.coord.lon);
+          console.log(data.main.temp);
+          console.log(data.main.humidity);
+          console.log(data.weather[0].icon);
+          console.log(data.wind.speed);
+          console.log(data.dt);
+
+          const searchLat = data.coord.lat; 
+          const searchLon = data.coord.lon;
+
+          // create array of current data
+          const currentWeather = {
+            currentTemp: data.main.temp,
+            currentHumidity: data.main.humidity,
+            currentIcon: data.weather[0].icon,
+            currentWind: data.wind.speed,
+            currentTime: data.dt,
+          }
+
+          console.log(currentWeather);
+
+        const weatherApiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${searchLat}&lon=${searchLon}&APPID=9025870b58f55c244123e7bc18ed93ea&units=imperial`
+      
+        fetch(weatherApiUrl)
+      .then(function (weatherResponse) {
+        if (weatherResponse.ok) {
+          return weatherResponse.json();
         } else {
-          throw new Error ('Failed to fetch coordinates');
+          throw new Error('Failed to fetch weather data')
         }
       })
-      .then(function (data) {
-            console.log(data.name);
-            console.log(data.coord.lat);
-            console.log(data.coord.lon);
-            console.log(data.main.temp);
-            console.log(data.main.humidity);
-            console.log(data.weather[0].icon);
-            console.log(data.wind.speed);
-            console.log(data.dt);
-
-            const searchLat = data.coord.lat; 
-            const searchLon = data.coord.lon;
-            const searchTemp = data.main.temp;
-
-          const weatherApiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${searchLat}&lon=${searchLon}&APPID=9025870b58f55c244123e7bc18ed93ea&units=imperial`
-        
-          fetch(weatherApiUrl)
-        .then(function (weatherResponse) {
-          if (weatherResponse.ok) {
-            return weatherResponse.json();
-          } else {
-            throw new Error('Failed to fetch weather data')
-          }
-        })
-        .then(function (weatherData) {
-            console.log(weatherData.list.main);
-        })
-        .catch(function (error) {
-            console.error('Error featching geographical coordinated:', error);
-        });
+      .then(function (weatherData) {
+          console.log(weatherData.list.main);
       })
+      .catch(function (error) {
+          console.error('Error featching geographical coordinated:', error);
+      });
+    })
 }
 
 
