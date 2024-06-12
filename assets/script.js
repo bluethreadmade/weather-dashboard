@@ -57,23 +57,21 @@ function searchSubmit(event) {
           const searchLon = data.coord.lon;
 
           const currentCity = data.name;
-          console.log(data.coord.lat);
-          console.log(data.coord.lon);
-          console.log(data.main.temp);
-          console.log(data.main.humidity);
-          console.log(data.weather[0].icon);
-          console.log(data.wind.speed);
-          console.log(data.dt);
+          const currentTemp = data.main.temp;
+          const currentHumidity = data.main.humidity;
+          const currentIcon = data.weather[0].icon;
+          const currentWind = data.wind.speed;
+          const currentTime = data.dt;
 
 
           // create array of current data
           const currentWeather = {
             city: currentCity,
-            temp: data.main.temp,
-            humidity: data.main.humidity,
-            icon: data.weather[0].icon,
-            wind: data.wind.speed,
-            time: data.dt,
+            temp: currentTemp,
+            humidity: currentHumidity,
+            icon: currentIcon,
+            wind: currentWind,
+            time: currentTime,
           };
 
           console.log(currentWeather);
@@ -104,6 +102,26 @@ function createCurrentWeatherArticle(currentWeather) {
         const currentWeatherArticle = $('<h2>')
           .addClass('container row col-8')
           .text(currentWeather.city)
+          .appendTo("#current-weather");
+        
+        const currentWeatherDay = $('<h3>')
+          .addClass('container row col-8')
+          .text(currentWeather.time)
+          .appendTo("#current-weather");
+
+        const currentTemp = $('<p>')
+          .addClass('container row col-8')
+          .text(currentWeather.temp)
+          .appendTo("#current-weather");
+
+        const currentHumidity = $('<p>')
+          .addClass('container row col-8')
+          .text(currentWeather.humidity)
+          .appendTo("#current-weather");
+
+        const currentIcon = $('<p>')
+          .addClass('container row col-8')
+          .text(currentWeather.icon)
           .appendTo("#current-weather");
 
   return currentWeatherArticle;
