@@ -20,6 +20,7 @@
 //     // }
 //   });
 let currentWeather = {};
+let oneDay = {};
 
 // takes the text entered in the search bar and assigns it to a variable when the search button is clicked
 function searchSubmit(event) {
@@ -76,7 +77,7 @@ function searchSubmit(event) {
 
           console.log(currentWeather);
 
-        const weatherApiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${searchLat}&lon=${searchLon}&cnt=1&APPID=9025870b58f55c244123e7bc18ed93ea&units=imperial`
+        const weatherApiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${searchLat}&lon=${searchLon}&APPID=9025870b58f55c244123e7bc18ed93ea&units=imperial`
       
         fetch(weatherApiUrl)
       .then(function (weatherResponse) {
@@ -89,20 +90,26 @@ function searchSubmit(event) {
       .then(function (weatherData) {
           console.log(weatherData);
 
-          weatherData.list.forEach(function(dayData) {
-            const dayTemp = dayData.main.temp.day;
-            const dayHumidity = dayData.main.humidity;
-          // const dayIcon = list.weather[0].icon;
-          // const dayWind = list.wind.speed;
-          // const dayTime = list.dt;
+            for(i=0; i< weatherData.list.length; i+=8) {
+              console.log(weatherData.list[i].dt_txt);
 
-          // console.log("5-day");
-          console.log(dayHumidity);
-          // console.log(list.main.humidity);
-          // console.log(list.weather[0].icon);
-          // console.log(list.wind.speed);
-          // console.log(list.dt);
-          
+              const dayTemp = weatherData.list[i].main.temp;
+              const dayHumidity = weatherData.list[i].main.humidity;
+              const dayIcon = weatherData.list[i].weather[0].icon;
+              const dayWind = weatherData.list[i].wind.speed;
+              const dayDate = weatherData.list[i].dt_txt;
+              
+              const oneDay = {
+                temp: dayTemp,
+                humidity: dayHumidity,
+                icon: dayIcon,
+                wind: dayWind,
+                date: dayDate
+              };
+              
+              return oneDay;
+            }
+            
         });
 
       })
@@ -111,41 +118,83 @@ function searchSubmit(event) {
       });
     
      createCurrentWeatherArticle(currentWeather);
-      })
+     createDayCards(oneDay);
+  };
 
-    };
+    
 
 function createCurrentWeatherArticle(currentWeather) {
-          console.log("hi");
-        const currentWeatherArticle = $('<h2>')
-          .addClass('container row col-8')
-          .text(currentWeather.city)
-          .appendTo("#current-weather");
-        
-        const currentWeatherDay = $('<h3>')
-          .addClass('container row col-8')
-          .text(currentWeather.time)
-          .appendTo("#current-weather");
 
-        const currentTemp = $('<p>')
-          .addClass('container row col-8')
-          .text(currentWeather.temp)
-          .appendTo("#current-weather");
+  console.log("current weather");
 
-        const currentHumidity = $('<p>')
-          .addClass('container row col-8')
-          .text(currentWeather.humidity)
-          .appendTo("#current-weather");
+  const currentWeatherArticle = $('<h2>')
+    .addClass('container row col-8')
+    .text(currentWeather.city)
+    .appendTo("#current-weather");
 
-        const currentIcon = $('<p>')
-          .addClass('container row col-8')
-          .text(currentWeather.icon)
-          .appendTo("#current-weather");
+  const currentWeatherDay = $('<h3>')
+    .addClass('container row col-8')
+    .text(currentWeather.time)
+    .appendTo("#current-weather");
+
+  const currentTemp = $('<p>')
+    .addClass('container row col-8')
+    .text(currentWeather.temp)
+    .appendTo("#current-weather");
+
+  const currentHumidity = $('<p>')
+    .addClass('container row col-8')
+    .text(currentWeather.humidity)
+    .appendTo("#current-weather");
+
+  const currentIcon = $('<p>')
+    .addClass('container row col-8')
+    .text(currentWeather.icon)
+    .appendTo("#current-weather");
 
   return currentWeatherArticle;
 };
 
-//function createFiveDay()
+function createDayCards() {
+
+  console.log("5 day")
+
+  const dayCard = $('<div>')
+    .addClass('card')
+    //.addStyle('width: 18rem;')   
+    .appendTo("#five-day");
+
+  const dayCardList = $('<ul>')
+    .addClass('list-group list-group-flush')
+    .appendTo("#five-day");
+
+  const dayCardTemp = $('<li>')
+    .addClass('list-group-item')
+    .text(oneDay.dayTemp)
+    .appendTo("#five-day");
+
+  const dayCardHumidity = $('<li>')
+    .addClass('list-group-item')
+    .text(oneDay.dayHumidity)
+    .appendTo("#five-day");
+
+  const dayCardIcon = $('<li>')
+    .addClass('list-group-item')
+    .text(oneDay.dayIcon)
+    .appendTo("#five-day");
+
+  const dayCardWind = $('<li>')
+    .addClass('list-group-item')
+    .text(oneDay.dayWind)
+    .appendTo("#five-day");
+
+  const dayCardDate = $('<li>')
+    .addClass('list-group-item')
+    .text(oneDay.dayDate)
+    .appendTo("#five-day");
+
+  return dayCard;
+};
 
 
 
