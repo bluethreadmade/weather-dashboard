@@ -33,7 +33,7 @@ function searchSubmit(event) {
     // clears the search bar
     $('#search-input').val('');
 
-    const geoApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${searchInput}&APPID=9025870b58f55c244123e7bc18ed93ea`;
+    const geoApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${searchInput}&APPID=9025870b58f55c244123e7bc18ed93ea&units=imperial`;
 
     fetch(geoApiUrl)
       .then(function (response) {
@@ -47,11 +47,17 @@ function searchSubmit(event) {
             console.log(data.name);
             console.log(data.coord.lat);
             console.log(data.coord.lon);
-            
+            console.log(data.main.temp);
+            console.log(data.main.humidity);
+            console.log(data.weather[0].icon);
+            console.log(data.wind.speed);
+            console.log(data.dt);
+
             const searchLat = data.coord.lat; 
             const searchLon = data.coord.lon;
+            const searchTemp = data.main.temp;
 
-          const weatherApiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${searchLat}&lon=${searchLon}&APPID=9025870b58f55c244123e7bc18ed93ea`
+          const weatherApiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${searchLat}&lon=${searchLon}&APPID=9025870b58f55c244123e7bc18ed93ea&units=imperial`
         
           fetch(weatherApiUrl)
         .then(function (weatherResponse) {
@@ -62,7 +68,7 @@ function searchSubmit(event) {
           }
         })
         .then(function (weatherData) {
-            console.log(weatherData);
+            console.log(weatherData.list.main);
         })
         .catch(function (error) {
             console.error('Error featching geographical coordinated:', error);
