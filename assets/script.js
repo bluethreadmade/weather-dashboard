@@ -56,14 +56,25 @@ function searchSubmit(event) {
           const searchLat = data.coord.lat; 
           const searchLon = data.coord.lon;
 
+          const currentCity = data.name;
+          console.log(data.coord.lat);
+          console.log(data.coord.lon);
+          console.log(data.main.temp);
+          console.log(data.main.humidity);
+          console.log(data.weather[0].icon);
+          console.log(data.wind.speed);
+          console.log(data.dt);
+
+
           // create array of current data
           const currentWeather = {
-            currentTemp: data.main.temp,
-            currentHumidity: data.main.humidity,
-            currentIcon: data.weather[0].icon,
-            currentWind: data.wind.speed,
-            currentTime: data.dt,
-          }
+            city: currentCity,
+            temp: data.main.temp,
+            humidity: data.main.humidity,
+            icon: data.weather[0].icon,
+            wind: data.wind.speed,
+            time: data.dt,
+          };
 
           console.log(currentWeather);
 
@@ -83,8 +94,21 @@ function searchSubmit(event) {
       .catch(function (error) {
           console.error('Error featching geographical coordinated:', error);
       });
+    
+     createCurrentWeatherArticle(currentWeather);
     })
 }
+
+function createCurrentWeatherArticle(currentWeather) {
+          console.log("hi");
+        const currentWeatherArticle = $('<h2>')
+          .addClass('container row col-8')
+          .text(currentWeather.city)
+          .appendTo("#current-weather");
+
+  return currentWeatherArticle;
+}
+
 
 
   
