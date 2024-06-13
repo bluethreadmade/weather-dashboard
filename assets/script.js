@@ -139,29 +139,37 @@ function createCurrentWeatherArticle(currentWeather) {
 
   console.log("current weather");
 
+  const formattedDate = dayjs.unix(currentWeather.time).format('MMM D, YYYY');
+
+  const currentWeatherDay = $('<h3>')
+    .addClass('container row col-8')
+    .text(formattedDate)
+    .appendTo("#current-weather");
+
   const currentWeatherArticle = $('<h2>')
     .addClass('container row col-8')
     .text(currentWeather.city)
     .appendTo("#current-weather");
 
-  const currentWeatherDay = $('<h3>')
-    .addClass('container row col-8')
-    .text(currentWeather.time)
-    .appendTo("#current-weather");
 
   const currentTemp = $('<p>')
     .addClass('container row col-8')
-    .text(currentWeather.temp)
+    .text('Temperature: ' + currentWeather.temp + 'F')
     .appendTo("#current-weather");
 
   const currentHumidity = $('<p>')
     .addClass('container row col-8')
-    .text(currentWeather.humidity)
+    .text('Humidity: ' + currentWeather.humidity + '%')
     .appendTo("#current-weather");
 
   const currentIcon = $('<p>')
     .addClass('container row col-8')
-    .text(currentWeather.icon)
+    .append($('<img>').attr('src', `https://openweathermap.org/img/wn/${currentWeather.icon}@2x.png`))
+    .appendTo("#current-weather");  
+
+  const currentWind = $('<p>')
+    .addClass('container row col-8')
+    .text('Wind Speed: ' + currentWeather.wind + 'mph')
     .appendTo("#current-weather");
 
   return currentWeatherArticle;
@@ -179,9 +187,11 @@ for (let i = 0; i < fiveDay.length; i++) {
     //.addStyle('width: 18rem;')   
     .appendTo("#five-day");
 
+    const formattedDate = dayjs(element.date).format('MMM D, YYYY');
+
     const dayCardDate = $('<div>')
       .addClass('card-header')
-      .text(element.date)
+      .text(formattedDate)
       .appendTo("#five-day");
       
     const dayCardIcon = $('<li>')
@@ -195,17 +205,17 @@ for (let i = 0; i < fiveDay.length; i++) {
 
     const dayCardTemp = $('<li>')
       .addClass('list-group-item')
-      .text('Temperature: ' + element.temp)
+      .text('Temperature: ' + element.temp + 'F')
       .appendTo("#five-day");
 
     const dayCardHumidity = $('<li>')
       .addClass('list-group-item')
-      .text('Humidity: ' + element.humidity)
+      .text('Humidity: ' + element.humidity + '%')
       .appendTo("#five-day");
 
     const dayCardWind = $('<li>')
       .addClass('list-group-item')
-      .text('Wind Speed: ' + element.wind)
+      .text('Wind Speed: ' + element.wind + 'mph')
       .appendTo("#five-day");
 
 
