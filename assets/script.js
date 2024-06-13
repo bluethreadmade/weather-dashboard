@@ -22,12 +22,18 @@
 let currentWeather = {};
 let oneDay = {};
 let fiveDay = [];
+let searchHistory = [];
 
 // takes the text entered in the search bar and assigns it to a variable when the search button is clicked
 function searchSubmit(event) {
   event.preventDefault();
 
   const searchInput = $('#search-input').val();
+
+  searchHistory.push(searchInput);
+
+  createSearchHistoryCards(searchHistory);
+  console.log(searchHistory);
   
   console.log("searched");
   console.log(searchInput);
@@ -217,12 +223,33 @@ for (let i = 0; i < fiveDay.length; i++) {
       .addClass('list-group-item')
       .text('Wind Speed: ' + element.wind + 'mph')
       .appendTo("#five-day");
-
-
 };
 
 };
+
+function createSearchHistoryCards(searchHistory) {
+  for (let i = 0; i < searchHistory.length; i++) {
+
+    const element = searchHistory[i];
+
+    console.log("history");
+
+    const historyBlock = $('<div>')
+      .addClass("btn-group-vertical")
+      //.addAttr("group");
+    
+    const historyItem = $('<button>')
+      .addClass("btn btn-secondary")
+      //.addAttr("button")
+      .text(element);
+      //class=>1</button>
+      //<button type="button" class="btn btn-secondary">2</button>
+      //</div>
+    
+  }
+}
 
 // Search button event listener
 $('#search-bar').on('submit', searchSubmit)
+
 
