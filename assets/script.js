@@ -50,8 +50,6 @@ function searchSubmit(event) {
           time: currentTime,
         };
 
-        console.log(currentWeather);
-
         const weatherApiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${searchLat}&lon=${searchLon}&APPID=9025870b58f55c244123e7bc18ed93ea&units=imperial`
       
         fetch(weatherApiUrl)
