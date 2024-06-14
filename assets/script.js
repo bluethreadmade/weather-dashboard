@@ -192,8 +192,6 @@ function createSearchHistoryCards(searchHistory) {
 
     const element = searchHistory[i];
 
-    console.log("history");
-
     const historyBlock = $('<ul>')
       .addClass("list-group")
       .appendTo('#search-history');
