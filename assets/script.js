@@ -114,26 +114,38 @@ function createCurrentWeatherArticle(currentWeather) {
     .text(currentWeather.city)
     .appendTo("#current-weather");
 
-  const currentIcon = $('<p>')
+  const currentRows = $('<div>')
     .addClass('container row')
-    .append($('<img>').attr('src', `https://openweathermap.org/img/wn/${currentWeather.icon}@2x.png`))
-    .appendTo("#current-weather");  
-    
-  const currentTemp = $('<p>')
-    .addClass('container row')
-    .text('Temperature: ' + currentWeather.temp + 'F')
-    .appendTo("#current-weather");
+    .appendTo('#current-weather')
 
-  const currentHumidity = $('<p>')
-    .addClass('container row')
-    .text('Humidity: ' + currentWeather.humidity + '%')
-    .appendTo("#current-weather");
+  const currentDivIcon = $('<div>')
+    .addClass('container col-6')
+    .appendTo(currentRows);
+
+    const currentIcon = $('<p>')
+      .addClass('container row')
+      .append($('<img>').attr('src', `https://openweathermap.org/img/wn/${currentWeather.icon}@2x.png`))
+      .appendTo(currentDivIcon);  
+  
+  const currentDivData = $('<div>')
+    .addClass('container col-6')
+    .appendTo(currentRows);
+
+    const currentTemp = $('<p>')
+      .addClass('container row')
+      .text('Temperature: ' + currentWeather.temp + 'F')
+      .appendTo(currentDivData);
+
+    const currentHumidity = $('<p>')
+      .addClass('container row')
+      .text('Humidity: ' + currentWeather.humidity + '%')
+      .appendTo(currentDivData);
 
 
-  const currentWind = $('<p>')
-    .addClass('container row')
-    .text('Wind Speed: ' + currentWeather.wind + 'mph')
-    .appendTo("#current-weather");
+    const currentWind = $('<p>')
+      .addClass('container row')
+      .text('Wind Speed: ' + currentWeather.wind + 'mph')
+      .appendTo(currentDivData);
 
   return currentWeatherArticle;
 };
