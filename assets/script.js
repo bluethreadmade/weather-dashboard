@@ -61,7 +61,6 @@ function searchSubmit(event) {
             }
           })
           .then(function (weatherData) {
-              console.log("forecast",weatherData.list);
 
                 for(let i=0; i< weatherData.list.length; i+=8) {
 
