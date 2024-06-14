@@ -52,15 +52,6 @@ function searchSubmit(event) {
       }
     })
      .then(function (data) {
-        // console.log(data.name);
-        // console.log(data.coord.lat);
-        // console.log(data.coord.lon);
-        // console.log(data.main.temp);
-        // console.log(data.main.humidity);
-        // console.log(data.weather[0].icon);
-        // console.log(data.wind.speed);
-        // console.log(data.dt);
-
         const searchLat = data.coord.lat; 
         const searchLon = data.coord.lon;
 
@@ -70,7 +61,6 @@ function searchSubmit(event) {
         const currentIcon = data.weather[0].icon;
         const currentWind = data.wind.speed;
         const currentTime = data.dt;
-
 
         // create array of current data
         const currentWeather = {
@@ -97,11 +87,7 @@ function searchSubmit(event) {
           .then(function (weatherData) {
               console.log("forecast",weatherData.list);
 
-              // declare an array
-
                 for(let i=0; i< weatherData.list.length; i+=8) {
-                  //console.log(weatherData.list[i].dt_txt);
-
 
                   const dayTemp = weatherData.list[i].main.temp;
                   const dayHumidity = weatherData.list[i].main.humidity;
@@ -117,12 +103,8 @@ function searchSubmit(event) {
                     date: dayDate
                   };
                   
-                  console.log("one day", oneDay);
-
                   // push new object to array
                   fiveDay.push(oneDay);
-                  
-                  
                   }
                   
                   
@@ -143,7 +125,8 @@ function searchSubmit(event) {
 
 function createCurrentWeatherArticle(currentWeather) {
 
-  console.log("current weather");
+  const previousSearched = $('#current-weather');
+  previousSearched.empty();
 
   const formattedDate = dayjs.unix(currentWeather.time).format('MMM D, YYYY');
 
@@ -156,7 +139,6 @@ function createCurrentWeatherArticle(currentWeather) {
     .addClass('container row col-8')
     .text(currentWeather.city)
     .appendTo("#current-weather");
-
 
   const currentTemp = $('<p>')
     .addClass('container row col-8')
@@ -247,6 +229,14 @@ function createSearchHistoryCards(searchHistory) {
       //</div>
     
   }
+}
+
+//function to clear the current day weather
+function clearCurrent() {
+  console.log("cleared");
+
+  const currentWeatherContainer = $('#current-weather');
+  currentWeatherContainer.empty();
 }
 
 // Search button event listener
