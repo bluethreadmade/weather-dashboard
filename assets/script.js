@@ -127,8 +127,8 @@ function createCurrentWeatherArticle(currentWeather) {
     .appendTo(currentRows);
 
     const currentIcon = $('<p>')
-      .addClass('container row w-75 m-2')
-      .append($('<img>').attr('src', `https://openweathermap.org/img/wn/${currentWeather.icon}@2x.png`))
+      .addClass('container d-flex justify-content-center row m-2')
+      .append($('<img>').addClass('w-75').attr('src', `https://openweathermap.org/img/wn/${currentWeather.icon}@2x.png`))
       .appendTo(currentDivIcon);  
   
   const currentDivData = $('<div>')
@@ -162,7 +162,7 @@ for (let i = 0; i < fiveDay.length; i++) {
   const element = fiveDay[i];
 
     const dayCard = $('<div>')
-    .addClass('card')
+    .addClass('card m-2')
     //.addStyle('width: 18rem;')   
     .appendTo("#five-day");
 
