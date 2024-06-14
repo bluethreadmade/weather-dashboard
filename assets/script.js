@@ -105,32 +105,33 @@ function createCurrentWeatherArticle(currentWeather) {
   const formattedDate = dayjs.unix(currentWeather.time).format('MMM D, YYYY');
 
   const currentWeatherDay = $('<h3>')
-    .addClass('container row col-8')
+    .addClass('container row')
     .text(formattedDate)
     .appendTo("#current-weather");
 
   const currentWeatherArticle = $('<h2>')
-    .addClass('container row col-8')
+    .addClass('container row')
     .text(currentWeather.city)
     .appendTo("#current-weather");
 
+  const currentIcon = $('<p>')
+    .addClass('container row')
+    .append($('<img>').attr('src', `https://openweathermap.org/img/wn/${currentWeather.icon}@2x.png`))
+    .appendTo("#current-weather");  
+    
   const currentTemp = $('<p>')
-    .addClass('container row col-8')
+    .addClass('container row')
     .text('Temperature: ' + currentWeather.temp + 'F')
     .appendTo("#current-weather");
 
   const currentHumidity = $('<p>')
-    .addClass('container row col-8')
+    .addClass('container row')
     .text('Humidity: ' + currentWeather.humidity + '%')
     .appendTo("#current-weather");
 
-  const currentIcon = $('<p>')
-    .addClass('container row col-8')
-    .append($('<img>').attr('src', `https://openweathermap.org/img/wn/${currentWeather.icon}@2x.png`))
-    .appendTo("#current-weather");  
 
   const currentWind = $('<p>')
-    .addClass('container row col-8')
+    .addClass('container row')
     .text('Wind Speed: ' + currentWeather.wind + 'mph')
     .appendTo("#current-weather");
 
