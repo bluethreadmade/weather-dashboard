@@ -139,13 +139,9 @@ function createCurrentWeatherArticle(currentWeather) {
 
 function createDayCards(fiveDay) {
 
- console.log("clear");
  const lastWeek = $('#five-day');
  lastWeek.empty();
- console.log("clear2");
-
 // loop through 5
-
 for (let i = 0; i < fiveDay.length; i++) {
   const element = fiveDay[i];
 
