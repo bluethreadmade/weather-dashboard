@@ -104,47 +104,50 @@ function createCurrentWeatherArticle(currentWeather) {
 
   const formattedDate = dayjs.unix(currentWeather.time).format('MMM D, YYYY');
 
-  const currentWeatherDay = $('<h3>')
+  const dayCityContainer = $('<div>')
     .addClass('container row')
-    .text(formattedDate)
-    .appendTo("#current-weather");
+    .appendTo("#current-weather")
 
-  const currentWeatherArticle = $('<h2>')
-    .addClass('container row')
-    .text(currentWeather.city)
-    .appendTo("#current-weather");
+    const currentWeatherDay = $('<h3>')
+      .addClass('container col-6 text-center')
+      .text(formattedDate)
+      .appendTo(dayCityContainer);
+
+    const currentWeatherArticle = $('<h3>')
+      .addClass('container col-6 text-center')
+      .text(currentWeather.city)
+      .appendTo(dayCityContainer);
 
   const currentRows = $('<div>')
     .addClass('container row')
     .appendTo('#current-weather')
 
   const currentDivIcon = $('<div>')
-    .addClass('container col-6')
+    .addClass('container col-6 d-flex flex-column justify-content-center')
     .appendTo(currentRows);
 
     const currentIcon = $('<p>')
-      .addClass('container row w-75')
+      .addClass('container row w-75 m-2')
       .append($('<img>').attr('src', `https://openweathermap.org/img/wn/${currentWeather.icon}@2x.png`))
       .appendTo(currentDivIcon);  
   
   const currentDivData = $('<div>')
-    .addClass('container col-6')
+    .addClass('container col-6 d-flex flex-column justify-content-center')
     .appendTo(currentRows);
 
     const currentTemp = $('<p>')
-      .addClass('container row')
-      .text('Temperature: ' + currentWeather.temp + 'F')
+      .addClass('container row m-2 justify-content-center')
+      .text('Temperature: ' + currentWeather.temp + ' F')
       .appendTo(currentDivData);
 
     const currentHumidity = $('<p>')
-      .addClass('container row')
-      .text('Humidity: ' + currentWeather.humidity + '%')
+      .addClass('container row m-2 justify-content-center')
+      .text('Humidity: ' + currentWeather.humidity + ' %')
       .appendTo(currentDivData);
 
-
     const currentWind = $('<p>')
-      .addClass('container row')
-      .text('Wind Speed: ' + currentWeather.wind + 'mph')
+      .addClass('container row m-2 justify-content-center')
+      .text('Wind Speed: ' + currentWeather.wind + ' mph')
       .appendTo(currentDivData);
 
   return currentWeatherArticle;
@@ -177,17 +180,17 @@ for (let i = 0; i < fiveDay.length; i++) {
 
     const dayCardTemp = $('<li>')
       .addClass('list-group-item')
-      .text('Temperature: ' + element.temp + 'F')
+      .text('Temp: ' + element.temp + ' F')
       .appendTo(dayCard);
 
     const dayCardHumidity = $('<li>')
       .addClass('list-group-item')
-      .text('Humidity: ' + element.humidity + '%')
+      .text('Humid: ' + element.humidity + ' %')
       .appendTo(dayCard);
 
     const dayCardWind = $('<li>')
       .addClass('list-group-item')
-      .text('Wind Speed: ' + element.wind + 'mph')
+      .text('Wind: ' + element.wind + ' mph')
       .appendTo(dayCard);
 };
 
@@ -206,7 +209,7 @@ function createSearchHistoryCards(searchHistory) {
       .appendTo('#search-history');
     
     const historyItem = $('<li>')
-      .addClass("list-group-item")
+      .addClass("list-group-item text-center m-2")
       .text(element)
       .appendTo(historyBlock);
     
