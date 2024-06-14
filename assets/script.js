@@ -62,30 +62,30 @@ function searchSubmit(event) {
           })
           .then(function (weatherData) {
 
-                for(let i=0; i< weatherData.list.length; i+=8) {
+            for(let i=0; i< weatherData.list.length; i+=8) {
 
-                  const dayTemp = weatherData.list[i].main.temp;
-                  const dayHumidity = weatherData.list[i].main.humidity;
-                  const dayIcon = weatherData.list[i].weather[0].icon;
-                  const dayWind = weatherData.list[i].wind.speed;
-                  const dayDate = weatherData.list[i].dt_txt;
-                  
-                  const oneDay = {
-                    temp: dayTemp,
-                    humidity: dayHumidity,
-                    icon: dayIcon,
-                    wind: dayWind,
-                    date: dayDate
-                  };
-                  
-                  // push new object to array
-                  fiveDay.push(oneDay);
-                  }
-                  
-                  
-                  createCurrentWeatherArticle(currentWeather);
-                  // pass array to create day cards
-                  createDayCards(fiveDay);
+              const dayTemp = weatherData.list[i].main.temp;
+              const dayHumidity = weatherData.list[i].main.humidity;
+              const dayIcon = weatherData.list[i].weather[0].icon;
+              const dayWind = weatherData.list[i].wind.speed;
+              const dayDate = weatherData.list[i].dt_txt;
+              
+              const oneDay = {
+                temp: dayTemp,
+                humidity: dayHumidity,
+                icon: dayIcon,
+                wind: dayWind,
+                date: dayDate
+              };
+              
+              // push new object to array
+              fiveDay.push(oneDay);
+              }
+              
+              
+              createCurrentWeatherArticle(currentWeather);
+              // pass array to create day cards
+              createDayCards(fiveDay);
                 
           });
 
@@ -162,10 +162,6 @@ for (let i = 0; i < fiveDay.length; i++) {
       .append($('<img>').attr('src', `https://openweathermap.org/img/wn/${element.icon}@2x.png`))
       .appendTo(dayCard);
 
-    const dayCardList = $('<ul>')
-      .addClass('list-group list-group-flush')
-      .appendTo(dayCard);
-
     const dayCardTemp = $('<li>')
       .addClass('list-group-item')
       .text('Temperature: ' + element.temp + 'F')
@@ -203,8 +199,6 @@ function createSearchHistoryCards(searchHistory) {
     
   }
 }
-
-
 
 // Search button event listener
 $('#search-bar').on('submit', searchSubmit)
