@@ -123,7 +123,7 @@ function createCurrentWeatherArticle(currentWeather) {
     .appendTo(currentRows);
 
     const currentIcon = $('<p>')
-      .addClass('container row')
+      .addClass('container row w-75')
       .append($('<img>').attr('src', `https://openweathermap.org/img/wn/${currentWeather.icon}@2x.png`))
       .appendTo(currentDivIcon);  
   
