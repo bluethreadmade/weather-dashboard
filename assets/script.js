@@ -1,24 +1,3 @@
-// async function apiTest() {
-//     const response = await fetch("https://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=9025870b58f55c244123e7bc18ed93ea");
-//     const movies = await response.json();
-//     console.log(movies);
-//     }
- 
-// apiTest()
-
-// const requestUrl = 'https://api.openweathermap.org/data/2.5/weather?q=`${London}`,uk&APPID=9025870b58f55c244123e7bc18ed93ea';
-
-// fetch(requestUrl)
-//   .then(function (response) {
-//     return response.json();
-//   })
-//   .then(function (data) {
-//     console.log('test test test \n----------');
-//     console.log(data.name)
-//     // for (let i = 0; i < data.length; i++) {
-//     //   console.log(data[i].name);
-//     // }
-//   });
 let currentWeather = {};
 let oneDay = {};
 let fiveDay = [];
@@ -31,15 +10,14 @@ function searchSubmit(event) {
   const searchInput = $('#search-input').val();
 
   searchHistory.push(searchInput);
-
-  createSearchHistoryCards(searchHistory);
-  console.log(searchHistory);
   
-  console.log("searched");
-  console.log(searchInput);
+  createSearchHistoryCards(searchHistory);
 
   // clears the search bar
   $('#search-input').val('');
+
+  // empties the five day array
+  fiveDay = [];
 
   const geoApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${searchInput}&APPID=9025870b58f55c244123e7bc18ed93ea&units=imperial`;
 
@@ -111,7 +89,6 @@ function searchSubmit(event) {
                   createCurrentWeatherArticle(currentWeather);
                   // pass array to create day cards
                   createDayCards(fiveDay);
-                  console.log("five day", fiveDay);
                 
           });
 
@@ -165,8 +142,13 @@ function createCurrentWeatherArticle(currentWeather) {
 
 function createDayCards(fiveDay) {
 
-  console.log("5 day")
+ console.log("clear");
+ const lastWeek = $('#five-day');
+ lastWeek.empty();
+ console.log("clear2");
+
 // loop through 5
+
 for (let i = 0; i < fiveDay.length; i++) {
   const element = fiveDay[i];
 
@@ -180,64 +162,58 @@ for (let i = 0; i < fiveDay.length; i++) {
     const dayCardDate = $('<div>')
       .addClass('card-header')
       .text(formattedDate)
-      .appendTo("#five-day");
+      .appendTo(dayCard);
       
     const dayCardIcon = $('<li>')
       .addClass('list-group-item')
       .append($('<img>').attr('src', `https://openweathermap.org/img/wn/${element.icon}@2x.png`))
-      .appendTo("#five-day");
+      .appendTo(dayCard);
 
     const dayCardList = $('<ul>')
       .addClass('list-group list-group-flush')
-      .appendTo("#five-day");
+      .appendTo(dayCard);
 
     const dayCardTemp = $('<li>')
       .addClass('list-group-item')
       .text('Temperature: ' + element.temp + 'F')
-      .appendTo("#five-day");
+      .appendTo(dayCard);
 
     const dayCardHumidity = $('<li>')
       .addClass('list-group-item')
       .text('Humidity: ' + element.humidity + '%')
-      .appendTo("#five-day");
+      .appendTo(dayCard);
 
     const dayCardWind = $('<li>')
       .addClass('list-group-item')
       .text('Wind Speed: ' + element.wind + 'mph')
-      .appendTo("#five-day");
+      .appendTo(dayCard);
 };
 
 };
 
 function createSearchHistoryCards(searchHistory) {
+
+  $('#search-history').empty();
+
   for (let i = 0; i < searchHistory.length; i++) {
 
     const element = searchHistory[i];
 
     console.log("history");
 
-    const historyBlock = $('<div>')
-      .addClass("btn-group-vertical")
-      //.addAttr("group");
+    const historyBlock = $('<ul>')
+      .addClass("list-group")
+      .appendTo('#search-history');
     
-    const historyItem = $('<button>')
-      .addClass("btn btn-secondary")
-      //.addAttr("button")
-      .text(element);
-      //class=>1</button>
-      //<button type="button" class="btn btn-secondary">2</button>
-      //</div>
+    const historyItem = $('<li>')
+      .addClass("list-group-item")
+      .text(element)
+      .appendTo(historyBlock);
     
   }
 }
 
-//function to clear the current day weather
-function clearCurrent() {
-  console.log("cleared");
 
-  const currentWeatherContainer = $('#current-weather');
-  currentWeatherContainer.empty();
-}
 
 // Search button event listener
 $('#search-bar').on('submit', searchSubmit)
