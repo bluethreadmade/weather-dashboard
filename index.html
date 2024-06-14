@@ -18,27 +18,24 @@
 
     <div class="row">
     <aside class="col-4">
-        <form class="p-4 mb-4 col-4" id="search-bar">
-            <h2>Search for a city:</h2>
+        <form class="p-4 mb-4 border-bottom" id="search-bar">
+            <h2 class="text-center">Search for a city</h2>
             <div>
-                <input type="text" class="form-control" id="search-input">
+                <input type="text" class="form-control m-2" id="search-input">
             </div>
-            <button type="search" class="btn btn-primary">Search</button>
+            <button type="search" class="btn btn-primary w-100 m-2">Search</button>
         </form>
-        
-        <h2>Search History</h2>
-        <div class="p-4 mb-4 col-4" id="search-history">
 
-        </div>
+        <div class="p-2"><h2 class="text-center">Search History</h2></div>
+        <div class="p-2 mb-4" id="search-history"></div>
     </aside>
 
     <main class="col-8">
-        <h2>Searched for city</h2>
-        <article class="p-4 mb-4 col-8" id="current-weather">
+        <article class="p-4 mb-4" id="current-weather">
         </article>
 
         <h2>5 Day Forecast</h2>
-        <article class="p-4 mb-4 col-8" >
+        <article class="p-4 mb-4" >
             <ul id="five-day" class="list-group list-group-horizontal"></ul>
         </article>
     </main>
