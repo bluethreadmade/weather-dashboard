@@ -211,7 +211,8 @@ function createSearchHistoryCards(searchHistory) {
     const historyItem = $('<li>')
       .addClass("list-group-item text-center m-2")
       .text(element)
-      .appendTo(historyBlock);
+      .appendTo(historyBlock)
+      .attr("id", "searchedItem");
     
   }
 }
