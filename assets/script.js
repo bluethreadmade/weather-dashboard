@@ -219,7 +219,7 @@ function createSearchHistoryCards(searchHistory) {
     const element = searchHistory[i];
     
     const historyItem = $('<button>')
-      .addClass("btn btn-secondary")
+      .addClass("btn btn-primary col-12")
       .text(element)
       .attr("id", "searchedItem")
       .appendTo('#search-history');
