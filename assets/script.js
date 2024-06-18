@@ -73,24 +73,26 @@ function searchSubmit(event) {
 
             for(let i=0; i< weatherData.list.length; i+=8) {
 
-              const dayTemp = weatherData.list[i].main.temp;
-              const dayHumidity = weatherData.list[i].main.humidity;
-              const dayIcon = weatherData.list[i].weather[0].icon;
-              const dayWind = weatherData.list[i].wind.speed;
-              const dayDate = weatherData.list[i].dt_txt;
-              
-              const oneDay = {
-                temp: dayTemp,
-                humidity: dayHumidity,
-                icon: dayIcon,
-                wind: dayWind,
-                date: dayDate
-              };
-              
-              // push new object to array
-              fiveDay.push(oneDay);
+                const dayTemp = weatherData.list[i].main.temp;
+                const dayHumidity = weatherData.list[i].main.humidity;
+                const dayIcon = weatherData.list[i].weather[0].icon;
+                const dayWind = weatherData.list[i].wind.speed;
+                const dayDate = weatherData.list[i].dt_txt;
+                
+                const oneDay = {
+                  temp: dayTemp,
+                  humidity: dayHumidity,
+                  icon: dayIcon,
+                  wind: dayWind,
+                  date: dayDate
+                };
+                
+                // push new object to array
+                fiveDay.push(oneDay);
               }
               
+              // sending all 5 days to local storage
+              localStorage.setItem(currentCity+"5", JSON.stringify(fiveDay));
               
               createCurrentWeatherArticle(currentWeather);
               // pass array to create day cards
