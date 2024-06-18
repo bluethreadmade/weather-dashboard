@@ -214,21 +214,23 @@ function createSearchHistoryCards(searchHistory) {
   for (let i = 0; i < searchHistory.length; i++) {
 
     const element = searchHistory[i];
-
-    const historyBlock = $('<ul>')
-      .addClass("list-group")
+    
+    const historyItem = $('<button>')
+      .addClass("btn btn-secondary")
+      .text(element)
+      .attr("id", "searchedItem")
       .appendTo('#search-history');
     
-    const historyItem = $('<li>')
-      .addClass("list-group-item text-center m-2")
-      .text(element)
-      .appendTo(historyBlock)
-      .attr("id", "searchedItem");
-    
   }
+}
+
+function renderSearchedFor(event) {
+  event.preventDefault();
+  console.log("clicked history");
 }
 
 // Search button event listener
 $('#search-bar').on('submit', searchSubmit)
 
-
+// Search history list group event listener
+$('#search-history').on('click', renderSearchedFor)
