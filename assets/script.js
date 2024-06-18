@@ -226,7 +226,15 @@ function createSearchHistoryCards(searchHistory) {
 
 function renderSearchedFor(event) {
   event.preventDefault();
-  console.log("clicked history");
+
+  const clickedButton = event.target.closest("button");
+  console.log(`${clickedButton.textContent}`);
+
+  // get the saved current weather for the clicked on history city 
+  //localStorage.getItem(searchedItem.val())
+  
+  //createCurrentWeatherArticle();
+  //createDayCards();
 }
 
 // Search button event listener
