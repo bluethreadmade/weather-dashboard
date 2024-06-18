@@ -93,6 +93,7 @@ function searchSubmit(event) {
               
               // sending all 5 days to local storage
               localStorage.setItem(currentCity+"5", JSON.stringify(fiveDay));
+              console.log(currentWeather);
               
               createCurrentWeatherArticle(currentWeather);
               // pass array to create day cards
@@ -230,10 +231,14 @@ function renderSearchedFor(event) {
   const clickedButton = event.target.closest("button");
   console.log(`${clickedButton.textContent}`);
 
-  // get the saved current weather for the clicked on history city 
-  //localStorage.getItem(searchedItem.val())
+  // get the saved current weather for the clicked on history city and set it to a variable
+  // JSON.parse(localStorage.getItem(`${clickedButton.textContent}`));
+  // console.log(JSON.parse(localStorage.getItem(`${clickedButton.textContent}`)));
+
+  let savedCurrentWeather = JSON.parse(localStorage.getItem(`${clickedButton.textContent}`));
   
-  //createCurrentWeatherArticle();
+  // pass that variable to the function to create the current weather display 
+  createCurrentWeatherArticle(savedCurrentWeather);
   //createDayCards();
 }
 
