@@ -239,7 +239,11 @@ function renderSearchedFor(event) {
   
   // pass that variable to the function to create the current weather display 
   createCurrentWeatherArticle(savedCurrentWeather);
-  //createDayCards();
+
+  // get the saved 5 day for the clicked on history city and set it to a variable
+  let savedFiveDay = JSON.parse(localStorage.getItem(`${clickedButton.textContent}`+"5"));
+
+  createDayCards(savedFiveDay);
 }
 
 // Search button event listener
