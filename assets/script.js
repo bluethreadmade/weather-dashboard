@@ -10,7 +10,9 @@ function searchSubmit(event) {
 
   const searchInput = $('#search-input').val();
 
-  searchHistory.push(searchInput);
+  if(!(searchHistory.includes(searchInput))) {
+    searchHistory.push(searchInput);
+  };
   
   createSearchHistoryCards(searchHistory);
 
