@@ -3,6 +3,7 @@ let oneDay = {};
 let fiveDay = [];
 let searchHistory = [];
 
+
 // takes the text entered in the search bar and assigns it to a variable when the search button is clicked
 function searchSubmit(event) {
   event.preventDefault();
@@ -50,9 +51,13 @@ function searchSubmit(event) {
           time: currentTime,
         };
 
-        let localCurrentWeather;
-        localStorage.setItem(localCurrentWeather, JSON.stringify(currentWeather));
-        console.log(localStorage.getItem(localCurrentWeather));
+        // creating an array called localCurrentWeather, adding JSON stringified current weather object to it
+        //cachedCurrentWeather[currentCity](JSON.stringify(currentWeather));
+
+        // sending localCurrentWeather to local storage
+        localStorage.setItem(currentCity, JSON.stringify(currentWeather));
+        //        localStorage.setItem(searchInput, JSON.stringify(currentWeather));
+
 
         const weatherApiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${searchLat}&lon=${searchLon}&APPID=9025870b58f55c244123e7bc18ed93ea&units=imperial`
       
