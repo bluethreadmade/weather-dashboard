@@ -1,5 +1,5 @@
 # Weather Dashboard
-This is a simple application using javascript, jquery, gtml, css and bootstrap to pull from the openweather api and display the current weather and the 5 day forecast for a city. THe search history is also displayed.
+This is a simple application using javascript, jquery, html, css and bootstrap to pull from the openweather api and display the current weather and the 5 day forecast for a city. THe search history is also displayed.
 
 # Link to deployed app
 https://bluethreadmade.github.io/weather-dashboard/
